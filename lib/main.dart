@@ -1,142 +1,164 @@
 import 'package:flutter/material.dart';
 
 void main() {
-  runApp(MyApp());
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
+  // lable one
+  const MyApp({Key? key}) : super(key: key);
+
+  // program dalam langsung diunduh dan dijalankan pada laptop, tanpa adanya kesalahan error
+
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      home: BelajarAppBar(),
-    );
+    return Main();
   }
 }
 
-class BelajarAppBar extends StatelessWidget {
-  ScrollController scrollController = new ScrollController();
-  List<String> entriesa = [
-    "RIP, LOVE  ",
-    "When Youre Gone ",
-    "Like All My Friends",
-    "Open Your Heart",
-    "Even Horison",
-    "You Were Loved",
-    "Stuck",
-    "Blow",
-    "Take My Hand",
-    "As It Was",
-    "Bam Bam",
-    "Light Switch",
-    "As It Was",
-    "Stay",
-  ];
-  List<String> entriesb = [
-    "Strongest ",
-    "Us in the Rain",
-    "Im Gonna Love You ",
-    "Matane Ga Areba",
-    "Cake",
-    "Morning Coffee",
-    "Weak",
-    "NandeMonaiya",
-    "Polaroid Love",
-    "Ghost",
-    "Because I Love You",
-    "Fiction",
-    "Corssing Field",
-    "Crying For Rain"
-  ];
-
-  List<String> entriesc = [
-    "One of a Kind",
-    "Gamushara",
+MaterialApp Main() {
+  final List music = [
     "With You",
-    "Dust",
     "Next To Me",
-    "Inception",
+    "Inception (feat. 1ho and chan",
     "Anoko Secret",
     "Last Dance",
     "Sunshine",
     "Dramatic Slow Motion",
     "Chocolatte Passion",
     "Pholaroid Love",
-    "Title",
     "Like Flames"
   ];
 
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      body: DefaultTabController(
-        length: 3,
-        child: NestedScrollView(
-          headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
-            return <Widget>[
-              SliverAppBar(
-                expandedHeight: 150.0,
-                floating: false,
-                pinned: true,
-                flexibleSpace: FlexibleSpaceBar(
-                  centerTitle: true,
-                  title: Text("AppBar",
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 20.0,
-                      )),
-                  background: Image(
-                    image: NetworkImage("https://images.pexels.com/photos/3194469/pexels-photo-3194469.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500"),
-                    fit: BoxFit.cover,
+  final List armusic = [
+    "Mokita",
+    "bear bear and friends, Gillchang",
+    "airman,1ho, chan",
+    "Eve",
+    "Eve",
+    "Anth, Conor Maynard",
+    "TK from 凛として時雨",
+    "凛として時雨",
+    "ENHYPEN",
+    "MindaRyn"
+  ];
+
+  final List almusic = [
+    "AudioTrim",
+    "Download",
+    "Watshapp Audio",
+    "Data",
+    "Music"
+  ];
+
+  return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      home: Scaffold(
+        body: DefaultTabController(
+            length: 3,
+            child: NestedScrollView(
+              headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
+                return <Widget>[
+                  SliverAppBar(
+                    expandedHeight: 150.0,
+                    floating: false,
+                    pinned: true,
+                    flexibleSpace: FlexibleSpaceBar(
+                      centerTitle: true,
+                      title: Container(
+                        padding: EdgeInsets.fromLTRB(15, 5, 15, 5),
+                        child: Text(" MP3 APP",
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontWeight: FontWeight.w600,
+                              fontSize: 15.0,
+                            )),
+                      ),
+                      background: Image(
+                        image: NetworkImage("https://images.pexels.com/photos/3194469/pexels-photo-3194469.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500"),
+                        fit: BoxFit.cover,
+                      ),
+                    ),
                   ),
+                  SliverPersistentHeader(
+                    pinned: true,
+                    delegate: _SliverAppBarDelegate(
+                      TabBar(
+                        labelColor: Colors.black87,
+                        unselectedLabelColor: Colors.orangeAccent,
+                        indicatorColor: Colors.orangeAccent,
+                        tabs: [
+                          new Tab(icon: new Icon(Icons.audiotrack), text: "Tracks"),
+                          new Tab(icon: new Icon(Icons.add_comment), text: "Playlist"),
+                          new Tab(icon: new Icon(Icons.add_comment), text: "Album"),
+                        ],
+                      ),
+                    ),
+                  ),
+                ];
+              },
+              body: Expanded(
+                child: Container(
+                  child: TabBarView(children: [
+                    Container(
+                      child: ListView.builder(
+                        padding: EdgeInsets.fromLTRB(15, 10, 15, 10),
+                        itemBuilder: (context, index) {
+                          return Card(
+                            child: ListTile(
+                              title: Text(music[index], style: TextStyle(fontSize: 16)),
+                              contentPadding: EdgeInsets.all(10),
+                              subtitle: Text("Song by. " + armusic[index]),
+                              leading: Container(
+                                child: Image.network("https://cdn.pixabay.com/photo/2022/03/08/03/57/mp3-7054985__340.png"),
+                              ),
+                            ),
+                          );
+                        },
+                        itemCount: music.length,
+                      ),
+                    ),
+                    Container(
+                      child: ListView.builder(
+                        padding: EdgeInsets.fromLTRB(15, 10, 15, 10),
+                        itemBuilder: (context, index) {
+                          return Card(
+                            child: ListTile(
+                              title: Text(music[index], style: TextStyle(fontSize: 14)),
+                              contentPadding: EdgeInsets.all(20),
+                              subtitle: Text('Song By' + armusic[index]),
+                              leading: Container(
+                                child: Image.network("https://cdn.pixabay.com/photo/2016/05/24/22/54/icon-1413583__340.png"),
+                              ),
+                            ),
+                          );
+                        },
+                        itemCount: music.length,
+                      ),
+                    ),
+                    Container(
+                      child: ListView.builder(
+                        padding: EdgeInsets.fromLTRB(15, 10, 15, 10),
+                        itemBuilder: (context, index) {
+                          return Card(
+                            child: ListTile(
+                              title: Text("Unknown ", style: TextStyle(fontSize: 14)),
+                              contentPadding: EdgeInsets.all(20),
+                              subtitle: Text(almusic[index]),
+                              leading: Container(
+                                child: Image.network("https://cdn.pixabay.com/photo/2016/05/24/22/54/icon-1413583__340.png"),
+                              ),
+                            ),
+                          );
+                        },
+                        itemCount: almusic.length,
+                      ),
+                    ),
+                  ]),
                 ),
               ),
-              SliverPersistentHeader(
-                pinned: true,
-                delegate: _SliverAppBarDelegate(
-                  TabBar(
-                    labelColor: Colors.black87,
-                    unselectedLabelColor: Colors.grey,
-                    tabs: [
-                      new Tab(icon: new Icon(Icons.audiotrack), text: "New Song"),
-                      new Tab(icon: new Icon(Icons.auto_stories), text: "History"),
-                      new Tab(icon: new Icon(Icons.add_comment), text: "My Playlist"),
-                    ],
-                  ),
-                ),
-              ),
-            ];
-          },
-          body: new TabBarView(
-            children: <Widget>[
-              new ListView.builder(
-                itemCount: entriesa.length,
-                controller: scrollController,
-                itemExtent: 40.0,
-                itemBuilder: (buildContext, index) {
-                  return new Text(entriesa[index]);
-                },
-              ),
-              new ListView.builder(
-                itemCount: entriesb.length,
-                itemExtent: 40.0,
-                itemBuilder: (buildContext, index) {
-                  return new Text(entriesb[index]);
-                },
-              ),
-              new ListView.builder(
-                itemCount: entriesc.length,
-                itemExtent: 40.0,
-                itemBuilder: (buildContext, index) {
-                  return new Text(entriesc[index]);
-                },
-              ),
-            ],
-          ),
-        ),
-      ),
-    );
-  }
+            )),
+      ));
 }
 
 class _SliverAppBarDelegate extends SliverPersistentHeaderDelegate {
@@ -153,6 +175,7 @@ class _SliverAppBarDelegate extends SliverPersistentHeaderDelegate {
   Widget build(BuildContext context, double shrinkOffset, bool overlapsContent) {
     return new Container(
       child: _tabBar,
+      color: Colors.white,
     );
   }
 
@@ -161,3 +184,4 @@ class _SliverAppBarDelegate extends SliverPersistentHeaderDelegate {
     return false;
   }
 }
+
